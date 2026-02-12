@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caso Epstein | Archivos Desclasificados</title>
+    <title>Caso Epstein | La Verdad Oculta</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z%22/><circle cx=%2212%22 cy=%2212%22 r=%223%22/></svg>">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
@@ -26,7 +29,7 @@
             font-family: 'Montserrat', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
-            /* Carga rápida (0.8s) pero con estilo */
+            /* Animación de carga rápida (0.8s) */
             opacity: 0;
             animation: fastMysteryReveal 0.8s ease-out forwards;
         }
@@ -48,6 +51,9 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* --- HEADER --- */
@@ -85,7 +91,7 @@
         .card:hover {
             border-color: var(--accent);
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(255,255,255,0.05);
+            box-shadow: 0 4px 20px rgba(255,255,255,0.05);
         }
 
         .card h3 { font-size: 1.2rem; margin-bottom: 15px; }
@@ -102,7 +108,7 @@
 
         .btn:hover { background-color: var(--text-main); color: var(--bg-color); }
 
-        /* --- SECCIÓN WHATSAPP (Misterio + QR Integrado) --- */
+        /* --- SECCIÓN WHATSAPP (Misterio + QR) --- */
         .whatsapp-section {
             margin-top: 60px;
             text-align: center;
@@ -122,16 +128,15 @@
             color: #999;
             max-width: 600px;
             margin: 0 auto 30px auto;
-            font-style: italic; /* Cursiva para tono de susurro/secreto */
+            font-style: italic;
         }
 
-        /* Contenedor QR */
         .qr-container {
             margin: 0 auto;
             width: 140px;
             height: 140px;
             transition: transform 0.3s ease;
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         .qr-container:hover {
@@ -139,7 +144,6 @@
             opacity: 1;
         }
 
-        /* QR Invertido (Blanco sobre negro) */
         .qr-img {
             width: 100%;
             height: 100%;
@@ -147,7 +151,6 @@
             mix-blend-mode: screen; 
         }
 
-        /* Link Minimalista */
         .minimal-link {
             font-family: 'Cinzel', serif;
             font-size: 0.85rem;
@@ -162,15 +165,31 @@
         .minimal-link:hover {
             color: var(--accent);
             border-bottom: 1px solid var(--accent);
-            letter-spacing: 2px; /* Expansión al pasar mouse */
+            letter-spacing: 2px;
         }
 
+        /* --- FOOTER PROFUNDO --- */
         footer {
+            margin-top: auto; /* Empuja el footer al final */
             text-align: center;
-            padding: 40px;
-            font-size: 0.7rem;
+            padding: 60px 20px;
             color: #444;
-            margin-top: 30px;
+        }
+
+        footer p {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        footer span {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.65rem;
+            opacity: 0.6;
         }
 
     </style>
@@ -187,7 +206,7 @@
         <section class="summary">
             <p>
                 Una red de influencia global, silencio sistemático y justicia fragmentada. 
-                Aquí se preserva la evidencia oficial y comunitaria.
+                Aquí se preserva la evidencia oficial y comunitaria para que nunca sea borrada.
             </p>
         </section>
 
@@ -222,8 +241,13 @@
         </section>
 
         <footer>
-            <p>Acceso Público &bull; Sin Fines de Lucro &bull; 2026</p>
+            <p>
+                "No somos una organización. Somos la memoria colectiva que se niega a olvidar. 
+                Buscamos la verdad en un mar de silencio."
+            </p>
+            <span>&copy; 2026 • Comunidad Global de Investigación</span>
         </footer>
+
     </div>
 
 </body>
