@@ -4,19 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caso Epstein | Archivos Desclasificados</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     
     <style>
-        /* --- VARIABLES Y RESET --- */
+        /* --- ESTILOS GENERALES (Basados en el Diseño 1) --- */
         :root {
             --bg-color: #050505;
-            --text-main: #dcdcdc; /* Gris muy claro, no blanco puro */
-            --text-dim: #666666;
+            --text-main: #e0e0e0;
+            --text-dim: #888888;
             --accent: #ffffff;
-            --border-thin: 1px solid #222;
+            --border: #333333;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,24 +24,19 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             font-family: 'Montserrat', sans-serif;
-            font-weight: 300; /* Letra más fina para minimalismo */
+            line-height: 1.6;
             overflow-x: hidden;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
+            /* Animación aplicada a todo el cuerpo */
+            opacity: 0; /* Inicia invisible */
+            animation: fastMysteryReveal 0.8s ease-out forwards;
         }
 
-        /* --- ANIMACIÓN DE MISTERIO (Carga Inicial) --- */
-        /* La página inicia borrosa y oscura, y se aclara lentamente */
-        @keyframes mysteryReveal {
+        /* --- ANIMACIÓN (Rápida y Misteriosa - 0.8s) --- */
+        @keyframes fastMysteryReveal {
             0% {
                 opacity: 0;
-                filter: blur(15px);
+                filter: blur(8px);
                 transform: scale(0.98);
-            }
-            40% {
-                opacity: 0.3;
-                filter: blur(5px);
             }
             100% {
                 opacity: 1;
@@ -51,217 +45,173 @@
             }
         }
 
-        .main-wrapper {
-            max-width: 700px;
-            width: 100%;
-            padding: 60px 25px;
-            /* Aplicamos la animación aquí */
-            animation: mysteryReveal 3s cubic-bezier(0.2, 1, 0.3, 1) forwards;
-        }
-
-        /* --- TIPOGRAFÍA --- */
         h1, h2, h3 {
             font-family: 'Cinzel', serif;
+            letter-spacing: 2px;
             font-weight: 400;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--accent);
         }
 
-        p {
-            line-height: 1.8;
-            font-size: 0.95rem;
-            color: #aaa;
-        }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-        a { text-decoration: none; color: inherit; transition: 0.4s; }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
 
         /* --- HEADER --- */
         header {
             text-align: center;
-            margin-bottom: 80px;
-            position: relative;
-        }
-        
-        header::after {
-            content: '';
-            display: block;
-            width: 1px;
-            height: 40px;
-            background: linear-gradient(to bottom, #333, transparent);
-            margin: 20px auto 0;
+            padding: 80px 0 40px;
+            border-bottom: 1px solid var(--border);
         }
 
-        header h1 { font-size: 2rem; margin-bottom: 10px; }
-        header .subtitle { color: var(--text-dim); font-size: 0.75rem; letter-spacing: 2px; }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; }
+        header p { color: var(--text-dim); font-size: 0.9rem; letter-spacing: 1px; }
 
-        /* --- LINKS (Estilo Expediente) --- */
-        .archive-links {
+        /* --- RESUMEN --- */
+        .summary { padding: 40px 0; text-align: center; }
+        .summary p { font-size: 1.1rem; margin-bottom: 20px; color: #ccc; }
+
+        /* --- TARJETAS (Diseño 1) --- */
+        .links-section {
             display: grid;
-            gap: 40px;
-            margin: 60px 0;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
         }
 
-        .archive-item {
-            border-left: 1px solid #333;
-            padding-left: 20px;
-            transition: border-color 0.5s;
+        @media(min-width: 768px) { .links-section { grid-template-columns: 1fr 1fr; } }
+
+        .card {
+            background: #0f0f0f;
+            border: 1px solid var(--border);
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
         }
 
-        .archive-item:hover {
-            border-left: 1px solid var(--accent);
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
         }
 
-        .archive-item h3 { font-size: 1rem; margin-bottom: 10px; opacity: 0.8; }
-        
-        .link-text {
+        .card h3 { font-size: 1.2rem; margin-bottom: 15px; }
+        .card p { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 25px; }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            border: 1px solid var(--text-main);
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 3px;
         }
 
-        .archive-item:hover .link-text {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-        }
+        .btn:hover { background-color: var(--text-main); color: var(--bg-color); }
 
-        /* --- SECCIÓN WHATSAPP & QR --- */
+        /* --- SECCIÓN WHATSAPP & QR (Mejorada) --- */
         .whatsapp-section {
-            margin-top: 100px;
+            margin-top: 60px;
             text-align: center;
-            border-top: var(--border-thin);
-            padding-top: 60px;
-        }
-
-        /* El contenedor del QR */
-        .qr-wrapper {
-            margin: 30px auto;
-            width: 160px;
-            height: 160px;
+            padding: 40px;
+            border-top: 1px solid var(--border);
             position: relative;
-            /* Efecto de borde sutil */
-            border: 1px solid #222;
-            padding: 10px;
-            transition: all 0.5s ease;
         }
 
-        .qr-wrapper:hover {
-            border-color: #555;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+        /* Contenedor del QR sin fondo blanco */
+        .qr-container {
+            margin: 20px auto;
+            width: 150px;
+            height: 150px;
+            transition: transform 0.3s ease;
         }
 
-        /* TRUCO VISUAL: Invertimos el QR para que sea blanco sobre negro */
-        .qr-code {
+        .qr-container:hover {
+            transform: scale(1.05);
+        }
+
+        /* La magia: Invertimos los colores del QR para que sea blanco sobre negro */
+        .qr-img {
             width: 100%;
             height: 100%;
-            filter: invert(1) grayscale(1) contrast(1.5);
-            opacity: 0.8;
-            transition: opacity 0.3s;
-        }
-        
-        .qr-wrapper:hover .qr-code {
-            opacity: 1;
+            filter: invert(1) grayscale(1) contrast(1.2);
+            mix-blend-mode: screen; /* Asegura que el negro del QR sea transparente */
+            opacity: 0.9;
         }
 
-        /* Botón Minimalista */
-        .minimal-btn {
-            display: inline-block;
-            margin-top: 20px;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        /* Link Minimalista */
+        .minimal-link {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
             color: var(--text-dim);
-            position: relative;
-        }
-
-        .minimal-btn::after {
-            content: '→';
-            margin-left: 8px;
-            opacity: 0;
-            transition: 0.3s;
+            border-bottom: 1px solid transparent;
+            padding-bottom: 2px;
+            margin-top: 20px;
             display: inline-block;
-            transform: translateX(-10px);
         }
 
-        .minimal-btn:hover {
+        .minimal-link:hover {
             color: var(--accent);
+            border-bottom: 1px solid var(--accent);
+            letter-spacing: 1px; /* Pequeña animación de expansión */
         }
 
-        .minimal-btn:hover::after {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* --- FOOTER --- */
         footer {
-            margin-top: 80px;
-            font-size: 0.6rem;
             text-align: center;
-            color: #333;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            padding: 40px;
+            font-size: 0.7rem;
+            color: #444;
+            margin-top: 30px;
         }
 
     </style>
 </head>
 <body>
 
-    <div class="main-wrapper">
+    <div class="container">
         
         <header>
-            <h1>Jeffrey Epstein</h1>
-            <div class="subtitle">Archivo Digital &bull; Evidencia Pública</div>
+            <h1>Expediente Epstein</h1>
+            <p>La verdad detrás del velo</p>
         </header>
 
-        <section class="intro">
+        <section class="summary">
             <p>
-                Este sitio sirve como repositorio centralizado para la documentación relacionada con el caso. 
-                La información aquí contenida proviene de fuentes gubernamentales y esfuerzos civiles globales.
-                El objetivo es la preservación de la memoria y el acceso a la verdad.
+                Una red de influencia global, silencio sistemático y justicia fragmentada. 
+                Aquí se preserva la evidencia oficial y comunitaria.
             </p>
         </section>
 
-        <section class="archive-links">
-            
-            <div class="archive-item">
-                <a href="https://www.justice.gov/epstein" target="_blank">
-                    <h3>Fuente Oficial (USA)</h3>
-                    <p>Acceso directo a los servidores del Departamento de Justicia.</p>
-                    <br>
-                    <span class="link-text">Examinar Archivo :: justice.gov</span>
-                </a>
+        <section class="links-section">
+            <div class="card">
+                <h3>Archivo Oficial</h3>
+                <p>Documentos liberados por el gobierno de EE.UU. (Justice.gov).</p>
+                <a href="https://www.justice.gov/epstein" target="_blank" class="btn">Acceder</a>
             </div>
 
-            <div class="archive-item">
-                <a href="https://jmail.world" target="_blank">
-                    <h3>Jmail World (Civil)</h3>
-                    <p>Recopilación comunitaria. Correos, bitácoras de vuelo y multimedia sin censura.</p>
-                    <br>
-                    <span class="link-text">Examinar Archivo :: jmail.world</span>
-                </a>
+            <div class="card">
+                <h3>Base de Datos Global</h3>
+                <p>Multimedia, correos y material sin censura (Jmail World).</p>
+                <a href="https://jmail.world" target="_blank" class="btn">Explorar</a>
             </div>
-
         </section>
 
         <section class="whatsapp-section">
-            <h2>Canal de Investigación</h2>
-            <p style="font-size: 0.8rem; margin-top: 10px; color: #555;">Acceso encriptado vía WhatsApp</p>
-
-            <div class="qr-wrapper">
-                <img class="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://chat.whatsapp.com/HRhDsMKRJumK77RZasco9z" alt="QR Acceso">
+            <h2 style="font-size: 1.2rem; color: #ccc;">Investigación en Curso</h2>
+            
+            <div class="qr-container">
+                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://chat.whatsapp.com/HRhDsMKRJumK77RZasco9z" alt="QR Acceso WhatsApp">
             </div>
 
-            <a href="https://chat.whatsapp.com/HRhDsMKRJumK77RZasco9z?mode=gi_t" target="_blank" class="minimal-btn">
-                Solicitar Acceso al Grupo
+            <a href="https://chat.whatsapp.com/HRhDsMKRJumK77RZasco9z?mode=gi_t" target="_blank" class="minimal-link">
+                Solicitar Acceso al Grupo &rarr;
             </a>
         </section>
 
         <footer>
-            Data Index 2024 &bull; Acceso Público
+            <p>Acceso Público &bull; Sin Fines de Lucro &bull; 2024</p>
         </footer>
-
     </div>
 
 </body>
