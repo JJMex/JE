@@ -154,10 +154,9 @@
 
         footer span { display: block; margin-top: 10px; font-size: 0.65rem; opacity: 0.6; }
 
-        /* Estilos del Contador */
         .visitor-counter {
             margin-top: 30px;
-            font-family: 'Share Tech Mono', monospace; /* Fuente tipo código/hacker */
+            font-family: 'Share Tech Mono', monospace;
             font-size: 0.75rem;
             color: #333;
             letter-spacing: 1px;
@@ -167,7 +166,6 @@
             color: var(--text-dim);
             font-weight: bold;
         }
-
     </style>
 </head>
 <body>
@@ -190,13 +188,25 @@
             <div class="card">
                 <h3>Archivo Oficial</h3>
                 <p>Documentos liberados por el gobierno de EE.UU. (Justice.gov).</p>
-                <a href="https://www.justice.gov/epstein" target="_blank" class="btn">Acceder</a>
+                <a id="link-official" href="#" target="_blank" class="btn">Acceder</a>
             </div>
 
             <div class="card">
                 <h3>Base de Datos Global</h3>
                 <p>Multimedia, correos y material sin censura (Jmail World).</p>
-                <a href="https://jmail.world" target="_blank" class="btn">Explorar</a>
+                <a id="link-db" href="#" target="_blank" class="btn">Explorar</a>
+            </div>
+
+            <div class="card">
+                <h3>JeffTube (Videoteca)</h3>
+                <p>Streaming forense. Visualización directa de interrogatorios y grabaciones incautadas.</p>
+                <a id="link-tube" href="#" target="_blank" class="btn">Ver Grabaciones</a>
+            </div>
+
+            <div class="card">
+                <h3>Raw Data (Sin Censura)</h3>
+                <p>Repositorio crudo. Documentos originales sin redacciones ni filtros. Evidencia primaria.</p>
+                <a id="link-raw" href="#" target="_blank" class="btn">Acceder al Raw</a>
             </div>
         </section>
 
@@ -208,10 +218,10 @@
             </p>
             
             <div class="qr-container">
-                <img class="qr-img" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://chat.whatsapp.com/LX1F4BbwlFxCtrvynpagy4?" alt="QR Acceso WhatsApp">
+                <img id="img-qr" class="qr-img" src="" alt="QR Acceso WhatsApp">
             </div>
 
-            <a href="https://chat.whatsapp.com/LX1F4BbwlFxCtrvynpagy4?" target="_blank" class="minimal-link">
+            <a id="link-wa" href="#" target="_blank" class="minimal-link">
                 Solicitar Ingreso al Círculo
             </a>
         </section>
@@ -231,22 +241,46 @@
     </div>
 
     <script>
-        // Nombre único para tu contador (puedes cambiar 'epstein-truth-archive-global' si quieres reiniciar la cuenta)
-        const namespace = 'epstein-truth-archive-global';
-        const key = 'visits';
+        
+        /* 1. VARIABLES EDITABLES (Cambia los links aquí) */
+        const CONFIG = {
+            link_oficial:   "https://www.justice.gov/epstein",
+            link_jmail:     "https://jmail.world",
+            link_jefftube:  "https://jmail.world/jefftube",
+            link_raw:       "https://tommycarstensen.com/epstein/",
+            link_whatsapp:  "https://chat.whatsapp.com/LX1F4BbwlFxCtrvynpagy4?" // Tu link de grupo
+        };
 
-        // Función para obtener y mostrar el número
-        fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
-            .then(response => response.json())
-            .then(data => {
-                // Formateamos el número para que tenga ceros a la izquierda (Ej: 004512)
-                const count = data.count.toString().padStart(6, '0');
-                document.getElementById('count').innerText = `[ ${count} ]`;
-            })
-            .catch(error => {
-                console.error('Error al cargar contador:', error);
-                document.getElementById('count').innerText = '[ OFF-LINE ]';
-            });
+        /* 2. LÓGICA DE ASIGNACIÓN (No tocar) */
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Asignar links a los botones
+            document.getElementById('link-official').href = CONFIG.link_oficial;
+            document.getElementById('link-db').href       = CONFIG.link_jmail;
+            document.getElementById('link-tube').href     = CONFIG.link_jefftube;
+            document.getElementById('link-raw').href      = CONFIG.link_raw;
+            document.getElementById('link-wa').href       = CONFIG.link_whatsapp;
+
+            // Generar QR automáticamente basado en el link de WhatsApp
+            const qrApiUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=";
+            document.getElementById('img-qr').src = qrApiUrl + encodeURIComponent(CONFIG.link_whatsapp);
+
+            // 3. CONTADOR DE VISITAS
+            const namespace = 'epstein-truth-archive-global';
+            const key = 'visits';
+
+            fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
+                .then(response => response.json())
+                .then(data => {
+                    const count = data.count.toString().padStart(6, '0');
+                    document.getElementById('count').innerText = `[ ${count} ]`;
+                })
+                .catch(error => {
+                    console.error('Error contador:', error);
+                    document.getElementById('count').innerText = '[ OFF-LINE ]';
+                });
+        });
+
     </script>
 
 </body>
