@@ -14,7 +14,6 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z%22/><circle cx=%2212%22 cy=%2212%22 r=%223%22/></svg>">
     
     <link rel="apple-touch-icon" href="https://img.icons8.com/ios-filled/180/ffffff/visible.png">
-    
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Expediente">
@@ -47,7 +46,6 @@
         }
         
         a, button, .interactive-element, .redacted { cursor: crosshair !important; -webkit-tap-highlight-color: transparent; }
-        
         h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 2px; font-weight: 400; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
@@ -106,7 +104,7 @@
             position: fixed; bottom: 15px; right: 15px; z-index: 9990; font-family: 'Share Tech Mono', monospace;
             font-size: 0.6rem; color: var(--text-dim); text-align: right; pointer-events: none; letter-spacing: 1px; line-height: 1.4;
         }
-        #ip-tracker { color: var(--alert-red); margin-top: 5px; display: block; }
+        .tracker-alert { color: var(--alert-red); }
 
         /* --- 6. DISEÑO ESTRUCTURAL (UI) --- */
         .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; min-height: 100vh; display: flex; flex-direction: column; position: relative; z-index: 10; }
@@ -119,7 +117,6 @@
         .summary p { font-size: 1.05rem; margin-bottom: 20px; color: #bbb; }
 
         .links-section { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 20px; }
-        
         .card { background: #0a0a0a; border: 1px solid var(--border); padding: 30px; text-align: center; transition: all 0.3s ease; }
         .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 0 15px rgba(255,255,255,0.05); }
         .card h3 { font-size: 1.1rem; margin-bottom: 15px; color: var(--accent); }
@@ -155,7 +152,6 @@
 
         .visitor-counter { margin-top: 40px; font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: #333; letter-spacing: 2px; }
 
-        /* --- 7. OPTIMIZACIÓN RESPONSIVA (Móviles) --- */
         @media(min-width: 768px) { 
             .links-section { grid-template-columns: 1fr 1fr; } 
             header h1 { font-size: 2.5rem; }
@@ -190,9 +186,12 @@
         <div class="blink-dot"></div>STATUS: UNREGISTERED NODE
     </div>
 
-    <div class="telemetry-bottom" id="sys-clock">
-        SYS.TIME: LOAD...<br>
-        <span id="ip-tracker">> TRACING CONNECTION: [ IDENTIFYING... ]</span>
+    <div class="telemetry-bottom">
+        <div id="sys-clock">SYS.TIME: LOAD...</div>
+        <div id="os-tracker">SYS: IDENTIFYING...</div>
+        <div id="bat-tracker" style="margin-bottom: 5px;">PWR: [ SECURE FEED ]</div>
+        <div id="ip-tracker" class="tracker-alert">> TRACING: [ IDENTIFYING... ]</div>
+        <div id="geo-tracker" class="tracker-alert">> NODE_LOC: [ ENCRYPTED ]</div>
     </div>
 
     <div id="main-content" class="container">
@@ -265,6 +264,24 @@
             link_whatsapp:  "https://chat.whatsapp.com/LX1F4BbwlFxCtrvynpagy4?"
         };
 
+        /* --- MENSAJE OCULTO EN CONSOLA --- */
+        console.log("%c" + "███████████████████████████", "color: #ff003c;");
+        console.log("%c" + " ACCESO RESTRINGIDO", "color: #ff003c; font-size: 24px; font-weight: bold;");
+        console.log("%c" + " Sabemos que estás inspeccionando el código.", "color: #d4d4d4; font-size: 14px;");
+        console.log("%c" + " Mantén la boca cerrada y no alteres los scripts.", "color: #00ff41; font-size: 14px;");
+        console.log("%c" + "███████████████████████████", "color: #ff003c;");
+
+        /* --- SÍNDROME DE LA PESTAÑA ABANDONADA --- */
+        const originalTitle = document.title;
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                document.title = "⚠️ ALERTA: RASTREO ACTIVO";
+            } else {
+                document.title = originalTitle;
+            }
+        });
+
+        /* --- AUDIO UI SINTÉTICO --- */
         const AudioContext = window.AudioContext || window.webkitAudioContext;
         let audioCtx;
 
@@ -290,13 +307,8 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             
-            const bootLines = [
-                { id: 'b1', delay: 200 },
-                { id: 'b2', delay: 600 },
-                { id: 'b3', delay: 1100 },
-                { id: 'b4', delay: 1700 }
-            ];
-
+            /* --- SECUENCIA DE ARRANQUE --- */
+            const bootLines = [ { id: 'b1', delay: 200 }, { id: 'b2', delay: 600 }, { id: 'b3', delay: 1100 }, { id: 'b4', delay: 1700 } ];
             bootLines.forEach(line => {
                 setTimeout(() => { document.getElementById(line.id).style.opacity = 1; }, line.delay);
             });
@@ -310,6 +322,7 @@
                 startHackerTitle();
             }, 2300);
 
+            /* --- ASIGNACIÓN DE ENLACES --- */
             document.getElementById('link-official').href = CONFIG.link_oficial;
             document.getElementById('link-db').href       = CONFIG.link_jmail;
             document.getElementById('link-tube').href     = CONFIG.link_jefftube;
@@ -322,6 +335,7 @@
                 size: 200, background: '#0a0a0a', foreground: '#ffffff'
             });
 
+            /* --- INTERACTIVIDAD BOTONES Y CENSURA --- */
             const buttons = document.querySelectorAll('.interactive-btn');
             buttons.forEach(btn => {
                 btn.addEventListener('click', function(e) {
@@ -330,33 +344,28 @@
                     const targetUrl = this.href;
                     const originalText = this.innerText;
                     
-                    // Se congela visualmente el texto y el color
                     this.style.backgroundColor = 'var(--text-main)';
                     this.style.color = 'var(--bg-color)';
                     this.style.borderColor = 'var(--text-main)';
                     this.innerText = '[ ESTABLECIENDO CONEXIÓN... ]';
                     
                     setTimeout(() => {
-                        // Navegación fluida: Intenta abrir nueva pestaña o redireccionar
                         let newTab = window.open(targetUrl, '_blank');
                         if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
                             window.location.href = targetUrl;
                         }
 
-                        // Restauración del botón (Sucede muy tarde, para que tus ojos no vean el "parpadeo" antes de salir de la página)
                         setTimeout(() => {
                             this.innerText = originalText;
                             this.style.backgroundColor = 'transparent';
                             this.style.color = 'inherit';
                             this.style.borderColor = 'var(--border)';
                         }, 2500); 
-
                     }, 1000); 
                 });
             });
 
             const interactiveElements = document.querySelectorAll('.interactive-element, .interactive-btn');
-            
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => playMechanicalClick());
             });
@@ -374,15 +383,46 @@
                 });
             });
 
-            fetch('https://api.ipify.org?format=json')
+            /* --- HUELLA DIGITAL Y GEOLOCALIZACIÓN --- */
+            // Identificación de OS
+            let osName = "UNKNOWN_SYS";
+            let ua = navigator.userAgent;
+            if (/Windows/i.test(ua)) osName = "WINDOWS_NT";
+            else if (/Mac/i.test(ua)) osName = "macOS_SYS";
+            else if (/Linux/i.test(ua)) osName = "LINUX_KERNEL";
+            else if (/Android/i.test(ua)) osName = "ANDROID_OS";
+            else if (/iPhone|iPad|iPod/i.test(ua)) osName = "iOS_DEVICE";
+            
+            document.getElementById('os-tracker').innerText = `SYS: ${osName} COMPROMISED`;
+
+            // Rastreo IP y Ciudad
+            fetch('https://get.geojs.io/v1/ip/geo.json')
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('ip-tracker').innerText = `> TRACING CONNECTION: [ ${data.ip} ]`;
+                    document.getElementById('ip-tracker').innerText = `> TRACING: [ ${data.ip} ]`;
+                    const locationString = (data.city && data.country_code) ? `${data.city.toUpperCase()}, ${data.country_code}` : 'UNKNOWN';
+                    document.getElementById('geo-tracker').innerText = `> NODE_LOC: [ ${locationString} ]`;
                 })
                 .catch(() => {
-                    document.getElementById('ip-tracker').innerText = `> TRACING CONNECTION: [ PROXY DETECTED ]`;
+                    document.getElementById('ip-tracker').innerText = `> TRACING: [ PROXY DETECTED ]`;
+                    document.getElementById('geo-tracker').innerText = `> NODE_LOC: [ ENCRYPTED ]`;
                 });
 
+            /* --- LECTOR DE BATERÍA (Fallback Integrado) --- */
+            if ('getBattery' in navigator) {
+                navigator.getBattery().then(function(battery) {
+                    function updateBattery() {
+                        const level = Math.round(battery.level * 100);
+                        const status = battery.charging ? 'CHARGING' : 'DISCHARGING';
+                        document.getElementById('bat-tracker').innerText = `PWR: ${level}% [ ${status} ]`;
+                    }
+                    updateBattery();
+                    battery.addEventListener('levelchange', updateBattery);
+                    battery.addEventListener('chargingchange', updateBattery);
+                }).catch(() => {});
+            }
+
+            /* --- HUEVO DE PASCUA --- */
             const rabbitHole = document.getElementById('rabbit-hole');
             const eggModal = document.getElementById('easter-egg-modal');
             const closeEgg = document.getElementById('close-egg');
@@ -396,6 +436,7 @@
                 eggModal.style.display = 'none';
             });
 
+            /* --- EFECTOS VISUALES CÍCLICOS --- */
             setInterval(() => {
                 const body = document.body;
                 body.classList.add('glitch-active');
@@ -404,7 +445,6 @@
 
             setInterval(() => {
                 const now = new Date();
-                
                 const year = now.getFullYear();
                 const month = String(now.getMonth() + 1).padStart(2, '0');
                 const day = String(now.getDate()).padStart(2, '0');
@@ -412,17 +452,17 @@
                 const minutes = String(now.getMinutes()).padStart(2, '0');
                 const seconds = String(now.getSeconds()).padStart(2, '0');
                 
-                const localTimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds} LOCAL`;
-                
-                document.getElementById('sys-clock').innerHTML = `SYS.TIME: ${localTimeString}<br>${document.getElementById('ip-tracker').outerHTML}`;
+                document.getElementById('sys-clock').innerText = `SYS.TIME: ${year}-${month}-${day} ${hours}:${minutes}:${seconds} LOCAL`;
             }, 1000);
 
+            /* --- CONTADOR DE VISITAS --- */
             fetch(`https://api.counterapi.dev/v1/epstein-truth-archive-global/visits/up`)
                 .then(r => r.json())
                 .then(data => { document.getElementById('count').innerText = `[ ${data.count.toString().padStart(6, '0')} ]`; })
                 .catch(() => { document.getElementById('count').innerText = '[ DATA CORRUPTED ]'; });
         });
 
+        /* --- TÍTULO DECODIFICADOR --- */
         function startHackerTitle() {
             const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
             const targetTitle = document.getElementById("glitch-title");
