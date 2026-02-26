@@ -12,6 +12,12 @@
     <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Eye_iris.jpg/1200px-Eye_iris.jpg">
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z%22/><circle cx=%2212%22 cy=%2212%22 r=%223%22/></svg>">
+    
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect width=%2224%22 height=%2224%22 fill=%22%23030303%22/><path d=%22M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/><circle cx=%2212%22 cy=%2212%22 r=%223%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Expediente">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,7 +46,6 @@
             overflow-x: hidden; cursor: crosshair;
         }
         
-        /* Evita el resaltado azul molesto al tocar botones en móviles */
         a, button, .interactive-element, .redacted { cursor: crosshair !important; -webkit-tap-highlight-color: transparent; }
         
         h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 2px; font-weight: 400; }
@@ -81,13 +86,10 @@
             100% { transform: translate(0); text-shadow: none; }
         }
 
-        /* Censura Gris Oscuro */
         .redacted {
             background-color: var(--censored-bg); color: var(--censored-bg); 
             padding: 0 4px; transition: 0.3s ease; user-select: none; border-radius: 2px;
         }
-        
-        /* Clase revelada para Hover (PC) y Touch (Móvil) */
         .redacted:hover, .redacted.revealed { 
             background-color: transparent; color: var(--accent); text-shadow: 0 0 8px rgba(255,255,255,0.4); 
         }
@@ -140,7 +142,7 @@
         footer { margin-top: auto; text-align: center; padding: 60px 20px 20px; color: #444; }
         footer p { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; max-width: 600px; margin: 0 auto; line-height: 2; }
         
-        #rabbit-hole { cursor: help; color: #555; transition: 0.3s; display: inline-block; padding: 10px; margin: -10px; } /* Área de toque más grande para móvil */
+        #rabbit-hole { cursor: help; color: #555; transition: 0.3s; display: inline-block; padding: 10px; margin: -10px; } 
         #rabbit-hole:hover { color: var(--alert-red); text-shadow: 0 0 5px var(--alert-red); }
         
         #easter-egg-modal {
@@ -160,9 +162,8 @@
             #easter-egg-modal h2 { font-size: 2rem; letter-spacing: 5px; }
         }
         @media(max-width: 767px) {
-            header h1 { font-size: 1.8rem; } /* Título más pequeño para que no se parta en móvil */
+            header h1 { font-size: 1.8rem; }
             .card { padding: 25px 15px; }
-            /* Se oculta el QR en móvil porque no pueden escanear la propia pantalla, dejando solo el botón limpio */
             .qr-container { display: none; }
             .minimal-link { margin-top: 10px; }
         }
@@ -339,24 +340,27 @@
                         this.style.backgroundColor = 'transparent';
                         this.style.color = 'inherit';
                         this.style.borderColor = 'var(--border)';
-                        window.open(targetUrl, '_blank');
+                        
+                        // PARCHE PARA NAVEGADORES MÓVILES
+                        // Intenta abrir en una nueva pestaña
+                        let newTab = window.open(targetUrl, '_blank');
+                        // Si el bloqueador de popups lo detiene, forza la navegación en la pestaña actual
+                        if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
+                            window.location.href = targetUrl;
+                        }
                     }, 1000); 
                 });
             });
 
-            /* COMPATIBILIDAD TÁCTIL Y MOUSE (Censura y Elementos interactivos) */
             const interactiveElements = document.querySelectorAll('.interactive-element, .interactive-btn');
             
-            // Para PC
             interactiveElements.forEach(el => {
                 el.addEventListener('mouseenter', () => playMechanicalClick());
             });
 
-            // Para Móviles (Toque en palabras censuradas para revelarlas)
             const redactedText = document.querySelectorAll('.redacted');
             redactedText.forEach(el => {
                 el.addEventListener('touchstart', function(e) {
-                    // Evitar que haga doble clic o se comporte raro
                     e.preventDefault(); 
                     if (!this.classList.contains('revealed')) {
                         playMechanicalClick();
@@ -380,7 +384,6 @@
             const eggModal = document.getElementById('easter-egg-modal');
             const closeEgg = document.getElementById('close-egg');
 
-            // Funciona tanto con clic (PC) como con toque (Móvil)
             rabbitHole.addEventListener('click', () => {
                 playMechanicalClick();
                 eggModal.style.display = 'flex';
@@ -396,11 +399,9 @@
                 setTimeout(() => body.classList.remove('glitch-active'), 200);
             }, 12000); 
 
-            /* --- RELOJ LOCAL EXACTO DEL USUARIO --- */
             setInterval(() => {
                 const now = new Date();
                 
-                // Extraemos y rellenamos con ceros para asegurar formato 00:00:00
                 const year = now.getFullYear();
                 const month = String(now.getMonth() + 1).padStart(2, '0');
                 const day = String(now.getDate()).padStart(2, '0');
@@ -408,7 +409,6 @@
                 const minutes = String(now.getMinutes()).padStart(2, '0');
                 const seconds = String(now.getSeconds()).padStart(2, '0');
                 
-                // Formato final: 2026-02-26 14:05:09 LOCAL
                 const localTimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds} LOCAL`;
                 
                 document.getElementById('sys-clock').innerHTML = `SYS.TIME: ${localTimeString}<br>${document.getElementById('ip-tracker').outerHTML}`;
