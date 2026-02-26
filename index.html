@@ -13,7 +13,7 @@
     
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z%22/><circle cx=%2212%22 cy=%2212%22 r=%223%22/></svg>">
     
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><rect width=%2224%22 height=%2224%22 fill=%22%23030303%22/><path d=%22M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/><circle cx=%2212%22 cy=%2212%22 r=%223%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/></svg>">
+    <link rel="apple-touch-icon" href="https://img.icons8.com/ios-filled/180/ffffff/visible.png">
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -330,24 +330,27 @@
                     const targetUrl = this.href;
                     const originalText = this.innerText;
                     
+                    // Se congela visualmente el texto y el color
                     this.style.backgroundColor = 'var(--text-main)';
                     this.style.color = 'var(--bg-color)';
                     this.style.borderColor = 'var(--text-main)';
                     this.innerText = '[ ESTABLECIENDO CONEXIÓN... ]';
                     
                     setTimeout(() => {
-                        this.innerText = originalText;
-                        this.style.backgroundColor = 'transparent';
-                        this.style.color = 'inherit';
-                        this.style.borderColor = 'var(--border)';
-                        
-                        // PARCHE PARA NAVEGADORES MÓVILES
-                        // Intenta abrir en una nueva pestaña
+                        // Navegación fluida: Intenta abrir nueva pestaña o redireccionar
                         let newTab = window.open(targetUrl, '_blank');
-                        // Si el bloqueador de popups lo detiene, forza la navegación en la pestaña actual
                         if (!newTab || newTab.closed || typeof newTab.closed == 'undefined') {
                             window.location.href = targetUrl;
                         }
+
+                        // Restauración del botón (Sucede muy tarde, para que tus ojos no vean el "parpadeo" antes de salir de la página)
+                        setTimeout(() => {
+                            this.innerText = originalText;
+                            this.style.backgroundColor = 'transparent';
+                            this.style.color = 'inherit';
+                            this.style.borderColor = 'var(--border)';
+                        }, 2500); 
+
                     }, 1000); 
                 });
             });
