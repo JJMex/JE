@@ -2,16 +2,16 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <title>Caso Epstein | La Verdad Oculta</title>
-    <meta name="description" content="Archivo desclasificado y repositorio global de evidencia sobre el caso Epstein. Acceso público restringido.">
-    
-    <meta property="og:title" content="Expediente Epstein | Base de Datos">
-    <meta property="og:description" content="Accede a la documentación oficial, red de correos y multimedia desclasificada. La madriguera es profunda.">
+    <title>Caso Epstein | Evidencia Clasificada</title>
+    <meta name="description" content="Terminal de acceso a la red de correos, multimedia y documentos oficiales del caso Epstein.">
+    <meta property="og:title" content="Expediente Epstein | Red de Inteligencia">
+    <meta property="og:description" content="Acceso restringido. La madriguera es profunda. Documentos sin censura y videoteca.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tu-dominio.com">
-    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Eye_iris.jpg/1200px-Eye_iris.jpg"> <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z%22/><circle cx=%2212%22 cy=%2212%22 r=%223%22/></svg>">
+    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Eye_iris.jpg/1200px-Eye_iris.jpg">
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z%22/><circle cx=%2212%22 cy=%2212%22 r=%223%22/></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,230 +20,242 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
 
     <style>
-        /* --- ESTILOS GENERALES --- */
+        /* --- 1. VARIABLES GLOBALES --- */
         :root {
-            --bg-color: #050505;
-            --text-main: #e0e0e0;
-            --text-dim: #888888;
+            --bg-color: #030303;
+            --text-main: #d4d4d4;
+            --text-dim: #777777;
             --accent: #ffffff;
-            --border: #333333;
+            --border: #222222;
             --hacker-green: #00ff41;
+            --alert-red: #ff003c;
+            --censored-bg: #151515; 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-            opacity: 0;
-            animation: fastMysteryReveal 0.8s ease-out forwards;
-            /* CURSOR TÁCTICO */
-            cursor: crosshair;
+            background-color: var(--bg-color); color: var(--text-main);
+            font-family: 'Montserrat', sans-serif; line-height: 1.6;
+            overflow-x: hidden; cursor: crosshair;
         }
-
-        /* CURSOR PARA ENLACES */
-        a, button, .btn, .minimal-link { cursor: crosshair !important; }
-
-        @keyframes fastMysteryReveal {
-            0% { opacity: 0; filter: blur(8px); transform: scale(0.99); }
-            100% { opacity: 1; filter: blur(0); transform: scale(1); }
-        }
-
+        
+        /* Evita el resaltado azul molesto al tocar botones en móviles */
+        a, button, .interactive-element, .redacted { cursor: crosshair !important; -webkit-tap-highlight-color: transparent; }
+        
         h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 2px; font-weight: 400; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-        /* --- EFECTOS DE ATMÓSFERA VISUAL --- */
-        
-        /* 1. Ruido Estático */
-        .noise-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 9998; opacity: 0.04;
-            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        /* --- 2. ATMÓSFERA: MONITOR FORENSE --- */
+        body::before { 
+            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            box-shadow: inset 0 0 200px rgba(0,0,0,0.95); pointer-events: none; z-index: 9996;
         }
-
-        /* 2. Línea de Escaneo */
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9997; opacity: 0.06;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
         .scanline {
-            position: fixed; top: 0; left: 0; width: 100%; height: 3px;
-            background: rgba(255, 255, 255, 0.05);
-            pointer-events: none; z-index: 9999;
-            animation: scan 6s linear infinite;
+            position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: rgba(255, 255, 255, 0.03);
+            pointer-events: none; z-index: 9998; animation: scan 8s linear infinite;
         }
         @keyframes scan { 0% { top: -10%; } 100% { top: 110%; } }
 
-        /* 3. Texto Censurado (Redacted) */
-        .redacted {
-            background-color: var(--text-main);
-            color: var(--text-main);
-            padding: 0 4px;
-            transition: 0.3s ease;
-            user-select: none;
+        /* --- 3. SECUENCIA DE ARRANQUE (BOOT) --- */
+        #boot-screen {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000;
+            z-index: 10000; display: flex; flex-direction: column; justify-content: center; padding: 40px;
+            font-family: 'Share Tech Mono', monospace; font-size: 1rem; color: var(--hacker-green);
         }
-        .redacted:hover {
-            background-color: transparent;
-            color: var(--accent);
-            text-shadow: 0 0 8px rgba(255,255,255,0.4);
+        .boot-line { margin-bottom: 10px; opacity: 0; }
+        #main-content { opacity: 0; transition: opacity 1s ease-in; display: none; }
+
+        /* --- 4. EFECTOS ESPECIALES --- */
+        .glitch-active { animation: rgbShift 0.2s cubic-bezier(.25, .46, .45, .94) both; }
+        @keyframes rgbShift {
+            0% { transform: translate(0); text-shadow: none; }
+            20% { transform: translate(-2px, 1px); text-shadow: 2px 0 var(--alert-red), -2px 0 blue; }
+            40% { transform: translate(-1px, -1px); text-shadow: 1px 0 var(--alert-red), -1px 0 blue; }
+            60% { transform: translate(2px, 1px); text-shadow: -2px 0 var(--alert-red), 2px 0 blue; }
+            80% { transform: translate(1px, -1px); text-shadow: none; }
+            100% { transform: translate(0); text-shadow: none; }
         }
 
-        /* --- TELEMETRÍA --- */
+        /* Censura Gris Oscuro */
+        .redacted {
+            background-color: var(--censored-bg); color: var(--censored-bg); 
+            padding: 0 4px; transition: 0.3s ease; user-select: none; border-radius: 2px;
+        }
+        
+        /* Clase revelada para Hover (PC) y Touch (Móvil) */
+        .redacted:hover, .redacted.revealed { 
+            background-color: transparent; color: var(--accent); text-shadow: 0 0 8px rgba(255,255,255,0.4); 
+        }
+
+        /* --- 5. TELEMETRÍA --- */
         .telemetry-top {
-            position: fixed; top: 15px; left: 20px; z-index: 1000;
-            font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--hacker-green);
-            display: flex; align-items: center; gap: 8px; opacity: 0.6; pointer-events: none;
+            position: fixed; top: 15px; left: 15px; z-index: 9990; font-family: 'Share Tech Mono', monospace;
+            font-size: 0.65rem; color: var(--alert-red); display: flex; align-items: center; gap: 8px; opacity: 0.6; pointer-events: none;
         }
-        .blink-dot {
-            width: 6px; height: 6px; background-color: var(--hacker-green); border-radius: 50%;
-            animation: blink 1.5s infinite;
-        }
-        @keyframes blink { 0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--hacker-green); } 50% { opacity: 0.2; box-shadow: none; } }
+        .blink-dot { width: 6px; height: 6px; background-color: var(--alert-red); border-radius: 50%; animation: blink 1.5s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--alert-red); } 50% { opacity: 0.2; box-shadow: none; } }
 
         .telemetry-bottom {
-            position: fixed; bottom: 15px; right: 20px; z-index: 1000;
-            font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--text-dim);
-            text-align: right; pointer-events: none; letter-spacing: 1px;
+            position: fixed; bottom: 15px; right: 15px; z-index: 9990; font-family: 'Share Tech Mono', monospace;
+            font-size: 0.6rem; color: var(--text-dim); text-align: right; pointer-events: none; letter-spacing: 1px; line-height: 1.4;
         }
+        #ip-tracker { color: var(--alert-red); margin-top: 5px; display: block; }
 
-        /* --- ESTRUCTURA BASE --- */
-        .container {
-            max-width: 800px; margin: 0 auto; padding: 40px 20px;
-            min-height: 100vh; display: flex; flex-direction: column; position: relative; z-index: 10;
-        }
-
-        header { text-align: center; padding: 80px 0 40px; border-bottom: 1px solid var(--border); }
-        header h1 { font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; min-height: 3rem; }
-        header p { color: var(--text-dim); font-size: 0.9rem; letter-spacing: 1px; }
+        /* --- 6. DISEÑO ESTRUCTURAL (UI) --- */
+        .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; min-height: 100vh; display: flex; flex-direction: column; position: relative; z-index: 10; }
+        
+        header { text-align: center; padding: 40px 0; border-bottom: 1px solid var(--border); }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; min-height: 3rem; color: var(--accent); }
+        header p { color: var(--text-dim); font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;}
 
         .summary { padding: 40px 0; text-align: center; }
-        .summary p { font-size: 1.1rem; margin-bottom: 20px; color: #ccc; }
+        .summary p { font-size: 1.05rem; margin-bottom: 20px; color: #bbb; }
 
         .links-section { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 20px; }
-        @media(min-width: 768px) { .links-section { grid-template-columns: 1fr 1fr; } }
-
-        .card { background: #0f0f0f; border: 1px solid var(--border); padding: 30px; text-align: center; transition: all 0.3s ease; }
-        .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(255,255,255,0.05); }
-        .card h3 { font-size: 1.2rem; margin-bottom: 15px; }
-        .card p { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 25px; min-height: 40px; }
-
-        .btn {
-            display: inline-block; padding: 10px 25px; border: 1px solid var(--text-main);
-            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; width: 100%; transition: 0.2s;
-        }
-        .btn:hover { background-color: var(--text-main); color: var(--bg-color); }
-
-        .whatsapp-section { margin-top: 60px; text-align: center; padding: 50px 20px; border-top: 1px solid var(--border); position: relative; }
-        .mystery-title { font-size: 1.3rem; color: var(--text-main); margin-bottom: 15px; }
-        .mystery-text { font-size: 0.95rem; color: #999; max-width: 600px; margin: 0 auto 30px auto; font-style: italic; }
-
-        .qr-container { margin: 0 auto; width: 140px; height: 140px; transition: transform 0.3s ease; opacity: 0.85; }
-        .qr-container:hover { transform: scale(1.05); opacity: 1; }
         
-        /* QR NATIVO CANVAS */
+        .card { background: #0a0a0a; border: 1px solid var(--border); padding: 30px; text-align: center; transition: all 0.3s ease; }
+        .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 0 15px rgba(255,255,255,0.05); }
+        .card h3 { font-size: 1.1rem; margin-bottom: 15px; color: var(--accent); }
+        .card p { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 25px; min-height: 40px; }
+
+        .btn { display: inline-block; padding: 12px 25px; border: 1px solid var(--border); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; width: 100%; transition: 0.2s; color: var(--text-dim); }
+        .btn:hover { background-color: var(--text-main); color: var(--bg-color); border-color: var(--text-main); font-weight: bold; }
+
+        .whatsapp-section { margin-top: 60px; text-align: center; padding: 50px 20px; border-top: 1px solid var(--border); }
+        .mystery-title { font-size: 1.2rem; color: var(--accent); margin-bottom: 15px; }
+        .mystery-text { font-size: 0.9rem; color: #888; max-width: 600px; margin: 0 auto 30px auto; font-style: italic; }
+
+        .qr-container { margin: 0 auto; width: 150px; height: 150px; opacity: 0.7; transition: 0.3s; padding: 5px; border: 1px solid #222; }
+        .qr-container:hover { opacity: 1; border-color: #555; }
         #qr-canvas { width: 100%; height: 100%; }
 
-        .minimal-link {
-            font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--text-dim);
-            border-bottom: 1px solid #444; padding-bottom: 4px; margin-top: 25px;
-            display: inline-block; letter-spacing: 1px; transition: 0.3s;
+        .minimal-link { font-family: 'Cinzel', serif; font-size: 0.8rem; color: var(--text-dim); border-bottom: 1px solid #333; padding-bottom: 2px; margin-top: 30px; display: inline-block; letter-spacing: 2px; transition: 0.3s; }
+        .minimal-link:hover { color: var(--accent); border-bottom-color: var(--accent); letter-spacing: 4px; }
+
+        footer { margin-top: auto; text-align: center; padding: 60px 20px 20px; color: #444; }
+        footer p { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1.5px; max-width: 600px; margin: 0 auto; line-height: 2; }
+        
+        #rabbit-hole { cursor: help; color: #555; transition: 0.3s; display: inline-block; padding: 10px; margin: -10px; } /* Área de toque más grande para móvil */
+        #rabbit-hole:hover { color: var(--alert-red); text-shadow: 0 0 5px var(--alert-red); }
+        
+        #easter-egg-modal {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.98);
+            z-index: 100000; display: none; flex-direction: column; justify-content: center; align-items: center;
+            color: var(--alert-red); font-family: 'Cinzel', serif; text-align: center; padding: 20px;
         }
-        .minimal-link:hover { color: var(--accent); border-bottom: 1px solid var(--accent); letter-spacing: 2px; }
+        #easter-egg-modal h2 { font-size: 1.5rem; letter-spacing: 3px; margin-bottom: 20px; animation: rgbShift 3s infinite; }
+        #close-egg { margin-top: 40px; font-family: 'Share Tech Mono', monospace; color: #555; font-size: 0.8rem; cursor: pointer; border-bottom: 1px solid #555; padding: 10px;}
 
-        footer { margin-top: auto; text-align: center; padding: 60px 20px; color: #444; }
-        footer p { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; max-width: 600px; margin: 0 auto; line-height: 1.8; }
-        footer span { display: block; margin-top: 10px; font-size: 0.65rem; opacity: 0.6; }
+        .visitor-counter { margin-top: 40px; font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: #333; letter-spacing: 2px; }
 
-        .visitor-counter { margin-top: 30px; font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: #333; letter-spacing: 1px; }
-        .counter-number { color: var(--text-dim); font-weight: bold; }
+        /* --- 7. OPTIMIZACIÓN RESPONSIVA (Móviles) --- */
+        @media(min-width: 768px) { 
+            .links-section { grid-template-columns: 1fr 1fr; } 
+            header h1 { font-size: 2.5rem; }
+            #easter-egg-modal h2 { font-size: 2rem; letter-spacing: 5px; }
+        }
+        @media(max-width: 767px) {
+            header h1 { font-size: 1.8rem; } /* Título más pequeño para que no se parta en móvil */
+            .card { padding: 25px 15px; }
+            /* Se oculta el QR en móvil porque no pueden escanear la propia pantalla, dejando solo el botón limpio */
+            .qr-container { display: none; }
+            .minimal-link { margin-top: 10px; }
+        }
     </style>
 </head>
 <body>
+
+    <div id="boot-screen">
+        <div class="boot-line" id="b1">> INITIALIZING TERMINAL...</div>
+        <div class="boot-line" id="b2">> BYPASSING FIREWALL...</div>
+        <div class="boot-line" id="b3">> DECRYPTING EPSTEIN_FILES.DAT...</div>
+        <div class="boot-line" id="b4" style="color: var(--text-main);">> ACCESS GRANTED.</div>
+    </div>
+
+    <div id="easter-egg-modal">
+        <h2>"No confíes en lo que se redacta.<br>Busca los nombres borrados."</h2>
+        <div id="close-egg">[ CERRAR CONEXIÓN ]</div>
+    </div>
 
     <div class="noise-overlay"></div>
     <div class="scanline"></div>
 
     <div class="telemetry-top">
-        <div class="blink-dot"></div>
-        SECURE UPLINK ESTABLISHED
+        <div class="blink-dot"></div>STATUS: UNREGISTERED NODE
     </div>
 
     <div class="telemetry-bottom" id="sys-clock">
-        SYS.TIME: LOAD...<br>LAT/LON: ENCRYPTED
+        SYS.TIME: LOAD...<br>
+        <span id="ip-tracker">> TRACING CONNECTION: [ IDENTIFYING... ]</span>
     </div>
 
-    <div class="container">
+    <div id="main-content" class="container">
         
         <header>
             <h1 id="glitch-title" data-value="Expediente Epstein">_</h1>
-            <p>La verdad detrás del velo</p>
+            <p>Database &bull; Top Secret</p>
         </header>
 
         <section class="summary">
             <p>
-                Una red de influencia global, <span class="redacted">silencio sistemático</span> y justicia fragmentada. 
-                Aquí se preserva la <span class="redacted">evidencia clasificada</span> y comunitaria para que nunca sea borrada por las <span class="redacted">élites del poder</span>.
+                Una red de influencia global, <span class="redacted interactive-element">silencio sistemático</span> y justicia fragmentada. 
+                Aquí se preserva la <span class="redacted interactive-element">evidencia clasificada</span> para que nunca sea borrada por las <span class="redacted interactive-element">élites del poder</span>.
             </p>
         </section>
 
         <section class="links-section">
             <div class="card">
-                <h3>Archivo Oficial</h3>
-                <p>Documentos liberados por el gobierno de EE.UU. (Justice.gov).</p>
+                <h3>Registro Federal [DOJ]</h3>
+                <p>Expedientes oficiales liberados por el gobierno de EE.UU. Contiene redacciones severas, omisiones y censura estatal.</p>
                 <a id="link-official" href="#" class="btn interactive-btn">Acceder</a>
             </div>
-
             <div class="card">
-                <h3>Base de Datos Global</h3>
-                <p>Multimedia, correos y material sin censura (Jmail World).</p>
+                <h3>Interfaz J-Mail</h3>
+                <p>Motor de búsqueda civil. Estructura indexada tipo buzón de correo para navegar la evidencia masiva con claridad.</p>
                 <a id="link-db" href="#" class="btn interactive-btn">Explorar</a>
             </div>
-
             <div class="card">
-                <h3>JeffTube (Videoteca)</h3>
-                <p>Streaming forense. Visualización directa de interrogatorios.</p>
+                <h3>Registros Audiovisuales</h3>
+                <p>Plataforma de streaming forense. Visualización directa de interrogatorios, cateos y metraje incautado.</p>
                 <a id="link-tube" href="#" class="btn interactive-btn">Ver Grabaciones</a>
             </div>
-
             <div class="card">
-                <h3>Raw Data (Sin Censura)</h3>
-                <p>Repositorio crudo. Documentos originales sin filtros redaccionales.</p>
+                <h3>Directorio Raw (Sin Filtros)</h3>
+                <p>Repositorio intacto. Documentos filtrados sin bloques de censura gubernamental. Proceda con discreción.</p>
                 <a id="link-raw" href="#" class="btn interactive-btn">Acceder al Raw</a>
             </div>
         </section>
 
         <section class="whatsapp-section">
             <h2 class="mystery-title">La Madriguera es Profunda</h2>
-            
             <p class="mystery-text">
-                Epstein no fue un caso aislado, fue un patrón. En nuestro grupo analizamos en tiempo real cada documento desclasificado y conectamos los hilos con otros sucesos similares. ¿Estás listo para ver lo que otros prefieren ocultar?
+                Epstein no fue un caso aislado, fue un patrón. Analizamos cada documento desclasificado y conectamos los hilos en tiempo real.
             </p>
-            
             <div class="qr-container">
                 <canvas id="qr-canvas"></canvas>
             </div>
-
             <a id="link-wa" href="#" class="minimal-link interactive-btn">
                 Solicitar Ingreso al Círculo
             </a>
         </section>
 
         <footer>
-            <p>
-                "No somos una organización. Somos la memoria colectiva que se niega a olvidar. 
-                Buscamos la verdad en un mar de silencio."
-            </p>
-            <span>&copy; 2026 • Comunidad Global de Investigación</span>
+            <p>"No somos una organización. Somos la memoria colectiva que se niega a olvidar."</p>
+            <span style="display:block; margin-top: 15px; font-size: 0.65rem; color: #444;">&copy; <span id="rabbit-hole" class="interactive-element">2026</span> • COMUNIDAD GLOBAL DE INVESTIGACIÓN</span>
 
             <div class="visitor-counter">
-                TESTIGOS DE LA VERDAD: <span id="count" class="counter-number">ENCRIPTANDO...</span>
+                TESTIGOS REGISTRADOS: <span id="count" style="color:#666;">ENCRIPTANDO...</span>
             </div>
         </footer>
 
     </div>
 
     <script>
-        
-        /* 1. VARIABLES EDITABLES (Cambia los links aquí) */
         const CONFIG = {
             link_oficial:   "https://www.justice.gov/epstein",
             link_jmail:     "https://jmail.world",
@@ -252,91 +264,178 @@
             link_whatsapp:  "https://chat.whatsapp.com/LX1F4BbwlFxCtrvynpagy4?"
         };
 
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx;
+
+        function playMechanicalClick() {
+            if (!audioCtx) audioCtx = new AudioContext();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.03);
+            
+            gainNode.gain.setValueAtTime(0.05, audioCtx.currentTime); 
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.03);
+            
+            osc.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.04);
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             
-            /* --- ASIGNACIÓN DE LINKS --- */
+            const bootLines = [
+                { id: 'b1', delay: 200 },
+                { id: 'b2', delay: 600 },
+                { id: 'b3', delay: 1100 },
+                { id: 'b4', delay: 1700 }
+            ];
+
+            bootLines.forEach(line => {
+                setTimeout(() => { document.getElementById(line.id).style.opacity = 1; }, line.delay);
+            });
+
+            setTimeout(() => {
+                document.getElementById('boot-screen').style.display = 'none';
+                const mainContent = document.getElementById('main-content');
+                mainContent.style.display = 'flex';
+                void mainContent.offsetWidth; 
+                mainContent.style.opacity = 1;
+                startHackerTitle();
+            }, 2300);
+
             document.getElementById('link-official').href = CONFIG.link_oficial;
             document.getElementById('link-db').href       = CONFIG.link_jmail;
             document.getElementById('link-tube').href     = CONFIG.link_jefftube;
             document.getElementById('link-raw').href      = CONFIG.link_raw;
             document.getElementById('link-wa').href       = CONFIG.link_whatsapp;
 
-            /* --- GENERACIÓN QR LOCAL (QRious) --- */
             new QRious({
                 element: document.getElementById('qr-canvas'),
                 value: CONFIG.link_whatsapp,
-                size: 250,
-                background: '#050505', // Mismo color de fondo
-                foreground: '#ffffff'  // QR en blanco
+                size: 200, background: '#0a0a0a', foreground: '#ffffff'
             });
 
-            /* --- MICRO-INTERACCIÓN: BOTONES CON RETRASO --- */
             const buttons = document.querySelectorAll('.interactive-btn');
             buttons.forEach(btn => {
                 btn.addEventListener('click', function(e) {
-                    e.preventDefault(); // Detiene el salto inmediato
+                    e.preventDefault();
+                    playMechanicalClick();
                     const targetUrl = this.href;
                     const originalText = this.innerText;
                     
-                    // Efecto Visual
                     this.style.backgroundColor = 'var(--text-main)';
                     this.style.color = 'var(--bg-color)';
+                    this.style.borderColor = 'var(--text-main)';
                     this.innerText = '[ ESTABLECIENDO CONEXIÓN... ]';
                     
-                    // Abrir pestaña tras 600ms
                     setTimeout(() => {
                         this.innerText = originalText;
                         this.style.backgroundColor = 'transparent';
                         this.style.color = 'inherit';
+                        this.style.borderColor = 'var(--border)';
                         window.open(targetUrl, '_blank');
-                    }, 600);
+                    }, 1000); 
                 });
             });
 
-            /* --- ANIMACIÓN HACKER (Decodificación del Título) --- */
+            /* COMPATIBILIDAD TÁCTIL Y MOUSE (Censura y Elementos interactivos) */
+            const interactiveElements = document.querySelectorAll('.interactive-element, .interactive-btn');
+            
+            // Para PC
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => playMechanicalClick());
+            });
+
+            // Para Móviles (Toque en palabras censuradas para revelarlas)
+            const redactedText = document.querySelectorAll('.redacted');
+            redactedText.forEach(el => {
+                el.addEventListener('touchstart', function(e) {
+                    // Evitar que haga doble clic o se comporte raro
+                    e.preventDefault(); 
+                    if (!this.classList.contains('revealed')) {
+                        playMechanicalClick();
+                        this.classList.add('revealed');
+                    } else {
+                        this.classList.remove('revealed');
+                    }
+                });
+            });
+
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip-tracker').innerText = `> TRACING CONNECTION: [ ${data.ip} ]`;
+                })
+                .catch(() => {
+                    document.getElementById('ip-tracker').innerText = `> TRACING CONNECTION: [ PROXY DETECTED ]`;
+                });
+
+            const rabbitHole = document.getElementById('rabbit-hole');
+            const eggModal = document.getElementById('easter-egg-modal');
+            const closeEgg = document.getElementById('close-egg');
+
+            // Funciona tanto con clic (PC) como con toque (Móvil)
+            rabbitHole.addEventListener('click', () => {
+                playMechanicalClick();
+                eggModal.style.display = 'flex';
+            });
+            closeEgg.addEventListener('click', () => {
+                playMechanicalClick();
+                eggModal.style.display = 'none';
+            });
+
+            setInterval(() => {
+                const body = document.body;
+                body.classList.add('glitch-active');
+                setTimeout(() => body.classList.remove('glitch-active'), 200);
+            }, 12000); 
+
+            /* --- RELOJ LOCAL EXACTO DEL USUARIO --- */
+            setInterval(() => {
+                const now = new Date();
+                
+                // Extraemos y rellenamos con ceros para asegurar formato 00:00:00
+                const year = now.getFullYear();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+                
+                // Formato final: 2026-02-26 14:05:09 LOCAL
+                const localTimeString = `${year}-${month}-${day} ${hours}:${minutes}:${seconds} LOCAL`;
+                
+                document.getElementById('sys-clock').innerHTML = `SYS.TIME: ${localTimeString}<br>${document.getElementById('ip-tracker').outerHTML}`;
+            }, 1000);
+
+            fetch(`https://api.counterapi.dev/v1/epstein-truth-archive-global/visits/up`)
+                .then(r => r.json())
+                .then(data => { document.getElementById('count').innerText = `[ ${data.count.toString().padStart(6, '0')} ]`; })
+                .catch(() => { document.getElementById('count').innerText = '[ DATA CORRUPTED ]'; });
+        });
+
+        function startHackerTitle() {
             const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
-            let interval = null;
             const targetTitle = document.getElementById("glitch-title");
             const finalWord = targetTitle.dataset.value;
-            
             let iteration = 0;
-            clearInterval(interval);
             
-            interval = setInterval(() => {
+            const interval = setInterval(() => {
                 targetTitle.innerText = finalWord.split("").map((letter, index) => {
-                    if(index < iteration) return targetTitle.dataset.value[index];
+                    if(index < iteration) return finalWord[index];
                     return letters[Math.floor(Math.random() * 26)];
                 }).join("");
                 
                 if(iteration >= finalWord.length) clearInterval(interval);
                 iteration += 1 / 3; 
             }, 40);
-
-            /* --- RELOJ TELEMETRÍA --- */
-            const clockElement = document.getElementById('sys-clock');
-            setInterval(() => {
-                const now = new Date();
-                // Formato militar estricto UTC
-                const timeString = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-                clockElement.innerHTML = `SYS.TIME: ${timeString}<br>LAT/LON: ENCRYPTED`;
-            }, 1000);
-
-            /* --- CONTADOR DE VISITAS --- */
-            const namespace = 'epstein-truth-archive-global';
-            const key = 'visits';
-
-            fetch(`https://api.counterapi.dev/v1/${namespace}/${key}/up`)
-                .then(response => response.json())
-                .then(data => {
-                    const count = data.count.toString().padStart(6, '0');
-                    document.getElementById('count').innerText = `[ ${count} ]`;
-                })
-                .catch(error => {
-                    document.getElementById('count').innerText = '[ OFF-LINE ]';
-                });
-        });
-
+        }
     </script>
-
 </body>
 </html>
