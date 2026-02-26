@@ -3,14 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caso Epstein | La Verdad Oculta</title>
     
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z%22/><circle cx=%2212%22 cy=%2212%22 r=%223%22/></svg>">
+    <title>Caso Epstein | La Verdad Oculta</title>
+    <meta name="description" content="Archivo desclasificado y repositorio global de evidencia sobre el caso Epstein. Acceso público restringido.">
+    
+    <meta property="og:title" content="Expediente Epstein | Base de Datos">
+    <meta property="og:description" content="Accede a la documentación oficial, red de correos y multimedia desclasificada. La madriguera es profunda.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tu-dominio.com">
+    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Eye_iris.jpg/1200px-Eye_iris.jpg"> <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%221.5%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z%22/><circle cx=%2212%22 cy=%2212%22 r=%223%22/></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+
     <style>
         /* --- ESTILOS GENERALES --- */
         :root {
@@ -19,6 +27,7 @@
             --text-dim: #888888;
             --accent: #ffffff;
             --border: #333333;
+            --hacker-green: #00ff41;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,156 +40,148 @@
             overflow-x: hidden;
             opacity: 0;
             animation: fastMysteryReveal 0.8s ease-out forwards;
+            /* CURSOR TÁCTICO */
+            cursor: crosshair;
         }
+
+        /* CURSOR PARA ENLACES */
+        a, button, .btn, .minimal-link { cursor: crosshair !important; }
 
         @keyframes fastMysteryReveal {
             0% { opacity: 0; filter: blur(8px); transform: scale(0.99); }
             100% { opacity: 1; filter: blur(0); transform: scale(1); }
         }
 
-        h1, h2, h3 {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 2px;
-            font-weight: 400;
-        }
-
+        h1, h2, h3 { font-family: 'Cinzel', serif; letter-spacing: 2px; font-weight: 400; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
+        /* --- EFECTOS DE ATMÓSFERA VISUAL --- */
+        
+        /* 1. Ruido Estático */
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 9998; opacity: 0.04;
+            background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        }
+
+        /* 2. Línea de Escaneo */
+        .scanline {
+            position: fixed; top: 0; left: 0; width: 100%; height: 3px;
+            background: rgba(255, 255, 255, 0.05);
+            pointer-events: none; z-index: 9999;
+            animation: scan 6s linear infinite;
+        }
+        @keyframes scan { 0% { top: -10%; } 100% { top: 110%; } }
+
+        /* 3. Texto Censurado (Redacted) */
+        .redacted {
+            background-color: var(--text-main);
+            color: var(--text-main);
+            padding: 0 4px;
+            transition: 0.3s ease;
+            user-select: none;
+        }
+        .redacted:hover {
+            background-color: transparent;
+            color: var(--accent);
+            text-shadow: 0 0 8px rgba(255,255,255,0.4);
+        }
+
+        /* --- TELEMETRÍA --- */
+        .telemetry-top {
+            position: fixed; top: 15px; left: 20px; z-index: 1000;
+            font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--hacker-green);
+            display: flex; align-items: center; gap: 8px; opacity: 0.6; pointer-events: none;
+        }
+        .blink-dot {
+            width: 6px; height: 6px; background-color: var(--hacker-green); border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; box-shadow: 0 0 5px var(--hacker-green); } 50% { opacity: 0.2; box-shadow: none; } }
+
+        .telemetry-bottom {
+            position: fixed; bottom: 15px; right: 20px; z-index: 1000;
+            font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--text-dim);
+            text-align: right; pointer-events: none; letter-spacing: 1px;
+        }
+
+        /* --- ESTRUCTURA BASE --- */
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            max-width: 800px; margin: 0 auto; padding: 40px 20px;
+            min-height: 100vh; display: flex; flex-direction: column; position: relative; z-index: 10;
         }
 
-        /* --- HEADER --- */
-        header {
-            text-align: center;
-            padding: 80px 0 40px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        header h1 { font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; }
+        header { text-align: center; padding: 80px 0 40px; border-bottom: 1px solid var(--border); }
+        header h1 { font-size: 2.5rem; margin-bottom: 10px; text-transform: uppercase; min-height: 3rem; }
         header p { color: var(--text-dim); font-size: 0.9rem; letter-spacing: 1px; }
 
-        /* --- RESUMEN --- */
         .summary { padding: 40px 0; text-align: center; }
         .summary p { font-size: 1.1rem; margin-bottom: 20px; color: #ccc; }
 
-        /* --- TARJETAS --- */
-        .links-section {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
+        .links-section { display: grid; grid-template-columns: 1fr; gap: 20px; margin-top: 20px; }
         @media(min-width: 768px) { .links-section { grid-template-columns: 1fr 1fr; } }
 
-        .card {
-            background: #0f0f0f;
-            border: 1px solid var(--border);
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(255,255,255,0.05);
-        }
-
+        .card { background: #0f0f0f; border: 1px solid var(--border); padding: 30px; text-align: center; transition: all 0.3s ease; }
+        .card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(255,255,255,0.05); }
         .card h3 { font-size: 1.2rem; margin-bottom: 15px; }
-        .card p { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 25px; }
+        .card p { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 25px; min-height: 40px; }
 
         .btn {
-            display: inline-block;
-            padding: 10px 25px;
-            border: 1px solid var(--text-main);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: inline-block; padding: 10px 25px; border: 1px solid var(--text-main);
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; width: 100%; transition: 0.2s;
         }
-
         .btn:hover { background-color: var(--text-main); color: var(--bg-color); }
 
-        /* --- SECCIÓN WHATSAPP --- */
-        .whatsapp-section {
-            margin-top: 60px;
-            text-align: center;
-            padding: 50px 20px;
-            border-top: 1px solid var(--border);
-            position: relative;
-        }
-
+        .whatsapp-section { margin-top: 60px; text-align: center; padding: 50px 20px; border-top: 1px solid var(--border); position: relative; }
         .mystery-title { font-size: 1.3rem; color: var(--text-main); margin-bottom: 15px; }
         .mystery-text { font-size: 0.95rem; color: #999; max-width: 600px; margin: 0 auto 30px auto; font-style: italic; }
 
-        .qr-container {
-            margin: 0 auto;
-            width: 140px;
-            height: 140px;
-            transition: transform 0.3s ease;
-            opacity: 0.85;
-        }
+        .qr-container { margin: 0 auto; width: 140px; height: 140px; transition: transform 0.3s ease; opacity: 0.85; }
         .qr-container:hover { transform: scale(1.05); opacity: 1; }
-        .qr-img {
-            width: 100%; height: 100%;
-            filter: invert(1) grayscale(1) contrast(1.2); mix-blend-mode: screen; 
-        }
+        
+        /* QR NATIVO CANVAS */
+        #qr-canvas { width: 100%; height: 100%; }
 
         .minimal-link {
             font-family: 'Cinzel', serif; font-size: 0.85rem; color: var(--text-dim);
             border-bottom: 1px solid #444; padding-bottom: 4px; margin-top: 25px;
-            display: inline-block; letter-spacing: 1px;
+            display: inline-block; letter-spacing: 1px; transition: 0.3s;
         }
         .minimal-link:hover { color: var(--accent); border-bottom: 1px solid var(--accent); letter-spacing: 2px; }
 
-        /* --- FOOTER & CONTADOR --- */
-        footer {
-            margin-top: auto;
-            text-align: center;
-            padding: 60px 20px;
-            color: #444;
-        }
-
-        footer p {
-            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px;
-            max-width: 600px; margin: 0 auto; line-height: 1.8;
-        }
-
+        footer { margin-top: auto; text-align: center; padding: 60px 20px; color: #444; }
+        footer p { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; max-width: 600px; margin: 0 auto; line-height: 1.8; }
         footer span { display: block; margin-top: 10px; font-size: 0.65rem; opacity: 0.6; }
 
-        .visitor-counter {
-            margin-top: 30px;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.75rem;
-            color: #333;
-            letter-spacing: 1px;
-        }
-        
-        .counter-number {
-            color: var(--text-dim);
-            font-weight: bold;
-        }
+        .visitor-counter { margin-top: 30px; font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: #333; letter-spacing: 1px; }
+        .counter-number { color: var(--text-dim); font-weight: bold; }
     </style>
 </head>
 <body>
 
+    <div class="noise-overlay"></div>
+    <div class="scanline"></div>
+
+    <div class="telemetry-top">
+        <div class="blink-dot"></div>
+        SECURE UPLINK ESTABLISHED
+    </div>
+
+    <div class="telemetry-bottom" id="sys-clock">
+        SYS.TIME: LOAD...<br>LAT/LON: ENCRYPTED
+    </div>
+
     <div class="container">
         
         <header>
-            <h1>Expediente Epstein</h1>
+            <h1 id="glitch-title" data-value="Expediente Epstein">_</h1>
             <p>La verdad detrás del velo</p>
         </header>
 
         <section class="summary">
             <p>
-                Una red de influencia global, silencio sistemático y justicia fragmentada. 
-                Aquí se preserva la evidencia oficial y comunitaria para que nunca sea borrada.
+                Una red de influencia global, <span class="redacted">silencio sistemático</span> y justicia fragmentada. 
+                Aquí se preserva la <span class="redacted">evidencia clasificada</span> y comunitaria para que nunca sea borrada por las <span class="redacted">élites del poder</span>.
             </p>
         </section>
 
@@ -188,25 +189,25 @@
             <div class="card">
                 <h3>Archivo Oficial</h3>
                 <p>Documentos liberados por el gobierno de EE.UU. (Justice.gov).</p>
-                <a id="link-official" href="#" target="_blank" class="btn">Acceder</a>
+                <a id="link-official" href="#" class="btn interactive-btn">Acceder</a>
             </div>
 
             <div class="card">
                 <h3>Base de Datos Global</h3>
                 <p>Multimedia, correos y material sin censura (Jmail World).</p>
-                <a id="link-db" href="#" target="_blank" class="btn">Explorar</a>
+                <a id="link-db" href="#" class="btn interactive-btn">Explorar</a>
             </div>
 
             <div class="card">
                 <h3>JeffTube (Videoteca)</h3>
-                <p>Streaming forense. Visualización directa de interrogatorios y grabaciones incautadas.</p>
-                <a id="link-tube" href="#" target="_blank" class="btn">Ver Grabaciones</a>
+                <p>Streaming forense. Visualización directa de interrogatorios.</p>
+                <a id="link-tube" href="#" class="btn interactive-btn">Ver Grabaciones</a>
             </div>
 
             <div class="card">
                 <h3>Raw Data (Sin Censura)</h3>
-                <p>Repositorio crudo. Documentos originales sin redacciones ni filtros. Evidencia primaria.</p>
-                <a id="link-raw" href="#" target="_blank" class="btn">Acceder al Raw</a>
+                <p>Repositorio crudo. Documentos originales sin filtros redaccionales.</p>
+                <a id="link-raw" href="#" class="btn interactive-btn">Acceder al Raw</a>
             </div>
         </section>
 
@@ -214,14 +215,14 @@
             <h2 class="mystery-title">La Madriguera es Profunda</h2>
             
             <p class="mystery-text">
-                Epstein no fue un caso aislado, fue un patrón. En nuestro grupo analizamos en tiempo real cada documento desclasificado y conectamos los hilos con otros sucesos similares que los medios ignoran. ¿Estás listo para ver lo que otros prefieren ocultar?
+                Epstein no fue un caso aislado, fue un patrón. En nuestro grupo analizamos en tiempo real cada documento desclasificado y conectamos los hilos con otros sucesos similares. ¿Estás listo para ver lo que otros prefieren ocultar?
             </p>
             
             <div class="qr-container">
-                <img id="img-qr" class="qr-img" src="" alt="QR Acceso WhatsApp">
+                <canvas id="qr-canvas"></canvas>
             </div>
 
-            <a id="link-wa" href="#" target="_blank" class="minimal-link">
+            <a id="link-wa" href="#" class="minimal-link interactive-btn">
                 Solicitar Ingreso al Círculo
             </a>
         </section>
@@ -234,7 +235,7 @@
             <span>&copy; 2026 • Comunidad Global de Investigación</span>
 
             <div class="visitor-counter">
-                TESTIGOS DE LA VERDAD: <span id="count" class="counter-number">Cargando...</span>
+                TESTIGOS DE LA VERDAD: <span id="count" class="counter-number">ENCRIPTANDO...</span>
             </div>
         </footer>
 
@@ -248,24 +249,79 @@
             link_jmail:     "https://jmail.world",
             link_jefftube:  "https://jmail.world/jefftube",
             link_raw:       "https://tommycarstensen.com/epstein/",
-            link_whatsapp:  "https://chat.whatsapp.com/LX1F4BbwlFxCtrvynpagy4?" // Tu link de grupo
+            link_whatsapp:  "https://chat.whatsapp.com/LX1F4BbwlFxCtrvynpagy4?"
         };
 
-        /* 2. LÓGICA DE ASIGNACIÓN (No tocar) */
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Asignar links a los botones
+            /* --- ASIGNACIÓN DE LINKS --- */
             document.getElementById('link-official').href = CONFIG.link_oficial;
             document.getElementById('link-db').href       = CONFIG.link_jmail;
             document.getElementById('link-tube').href     = CONFIG.link_jefftube;
             document.getElementById('link-raw').href      = CONFIG.link_raw;
             document.getElementById('link-wa').href       = CONFIG.link_whatsapp;
 
-            // Generar QR automáticamente basado en el link de WhatsApp
-            const qrApiUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=";
-            document.getElementById('img-qr').src = qrApiUrl + encodeURIComponent(CONFIG.link_whatsapp);
+            /* --- GENERACIÓN QR LOCAL (QRious) --- */
+            new QRious({
+                element: document.getElementById('qr-canvas'),
+                value: CONFIG.link_whatsapp,
+                size: 250,
+                background: '#050505', // Mismo color de fondo
+                foreground: '#ffffff'  // QR en blanco
+            });
 
-            // 3. CONTADOR DE VISITAS
+            /* --- MICRO-INTERACCIÓN: BOTONES CON RETRASO --- */
+            const buttons = document.querySelectorAll('.interactive-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault(); // Detiene el salto inmediato
+                    const targetUrl = this.href;
+                    const originalText = this.innerText;
+                    
+                    // Efecto Visual
+                    this.style.backgroundColor = 'var(--text-main)';
+                    this.style.color = 'var(--bg-color)';
+                    this.innerText = '[ ESTABLECIENDO CONEXIÓN... ]';
+                    
+                    // Abrir pestaña tras 600ms
+                    setTimeout(() => {
+                        this.innerText = originalText;
+                        this.style.backgroundColor = 'transparent';
+                        this.style.color = 'inherit';
+                        window.open(targetUrl, '_blank');
+                    }, 600);
+                });
+            });
+
+            /* --- ANIMACIÓN HACKER (Decodificación del Título) --- */
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+            let interval = null;
+            const targetTitle = document.getElementById("glitch-title");
+            const finalWord = targetTitle.dataset.value;
+            
+            let iteration = 0;
+            clearInterval(interval);
+            
+            interval = setInterval(() => {
+                targetTitle.innerText = finalWord.split("").map((letter, index) => {
+                    if(index < iteration) return targetTitle.dataset.value[index];
+                    return letters[Math.floor(Math.random() * 26)];
+                }).join("");
+                
+                if(iteration >= finalWord.length) clearInterval(interval);
+                iteration += 1 / 3; 
+            }, 40);
+
+            /* --- RELOJ TELEMETRÍA --- */
+            const clockElement = document.getElementById('sys-clock');
+            setInterval(() => {
+                const now = new Date();
+                // Formato militar estricto UTC
+                const timeString = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+                clockElement.innerHTML = `SYS.TIME: ${timeString}<br>LAT/LON: ENCRYPTED`;
+            }, 1000);
+
+            /* --- CONTADOR DE VISITAS --- */
             const namespace = 'epstein-truth-archive-global';
             const key = 'visits';
 
@@ -276,7 +332,6 @@
                     document.getElementById('count').innerText = `[ ${count} ]`;
                 })
                 .catch(error => {
-                    console.error('Error contador:', error);
                     document.getElementById('count').innerText = '[ OFF-LINE ]';
                 });
         });
